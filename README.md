@@ -1,1 +1,2 @@
-# NWUDiscoveryAccountSystem
+# Miles Account System
+NWU in collaboration with Discovery 
