@@ -1,0 +1,6 @@
+# Project exclude paths
+/Domain/target/
+/Logic/target/
+/Repository/target/
+/Translator/target/
+/Web/target/
