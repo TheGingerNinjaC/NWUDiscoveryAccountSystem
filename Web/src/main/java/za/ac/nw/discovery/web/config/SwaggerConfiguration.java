@@ -30,13 +30,16 @@ public class SwaggerConfiguration {
     private String applicationDescription;
 
     @Bean
-    public Docket api(){
-        return new Docket(DocumentationType.SWAGGER_2).select()
+    public Docket api() {
+        Docket docket = new Docket(DocumentationType.SWAGGER_2)
+                .select()
                 .apis(RequestHandlerSelectors.withClassAnnotation(RestController.class))
                 .paths(PathSelectors.any())
                 .build()
                 .pathMapping("/")
                 .apiInfo(apiInfo());
+
+        return docket;
     }
 
     private ApiInfo apiInfo(){
