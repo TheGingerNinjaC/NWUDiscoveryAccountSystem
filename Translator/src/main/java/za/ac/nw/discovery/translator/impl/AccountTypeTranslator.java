@@ -34,6 +34,7 @@ public class AccountTypeTranslator implements IAccountTypeTranslator {
         return accountTypeDtos;
     }
 
+    @Override
     public AccountTypeDto create(AccountTypeDto accountTypeDto){
         try {
             AccountType accountType = accountTypeRepository.save(accountTypeDto.getAccountType());
@@ -42,4 +43,15 @@ public class AccountTypeTranslator implements IAccountTypeTranslator {
             throw new RuntimeException("Unable to save to the DB", e);
         }
     }
+
+    @Override
+    public AccountTypeDto getAccountTypeByMnemonicNativeQuery(String mnemonic) {
+        try {
+            AccountType accountType = accountTypeRepository.getAccountTypeByMnemonicNativeQuery(mnemonic);
+            return new AccountTypeDto((accountType));
+        } catch (Exception e) {
+            throw new RuntimeException("Unable to read from the DB", e);
+        }
+    }
+
 }
