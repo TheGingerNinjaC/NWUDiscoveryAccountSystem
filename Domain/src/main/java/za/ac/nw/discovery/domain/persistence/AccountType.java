@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "Account_Type")
@@ -14,6 +15,8 @@ public class AccountType implements Serializable {
     private String accountTypeName;
     private LocalDate creationDate;
 
+    private Set<Transaction> transactions;
+
     public AccountType(Long accountTypeId, String mnemonic, String accountTypeName, LocalDate creationDate) {
         this.accountTypeId = accountTypeId;
         this.mnemonic = mnemonic;
@@ -22,10 +25,18 @@ public class AccountType implements Serializable {
     }
 
     public AccountType() {
+
+    }
+
+    public AccountType(String mnemonic, String accountTypeName, LocalDate creationDate) {
+        this.mnemonic = mnemonic;
+        this.accountTypeName = accountTypeName;
+        this.creationDate = creationDate;
     }
 
     @Id
     @Column(name = "Account_Type_Id")
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     public Long getAccountTypeId() {
         return accountTypeId;
     }

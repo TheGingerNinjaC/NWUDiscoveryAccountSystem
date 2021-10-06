@@ -4,6 +4,6 @@ import za.ac.nw.discovery.domain.dto.AccountTypeDto;
 
 import java.util.List;
 
-public interface FetchAccountTypeFlow {
+public interface IFetchAccountTypeFlow {
     List<AccountTypeDto> getAllAccountTypes();
 }

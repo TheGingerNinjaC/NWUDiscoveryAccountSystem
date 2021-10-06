@@ -33,4 +33,13 @@ public class AccountTypeTranslator implements IAccountTypeTranslator {
         }
         return accountTypeDtos;
     }
+
+    public AccountTypeDto create(AccountTypeDto accountTypeDto){
+        try {
+            AccountType accountType = accountTypeRepository.save(accountTypeDto.getAccountType());
+            return new AccountTypeDto(accountType);
+        } catch (Exception e) {
+            throw new RuntimeException("Unable to save to the DB", e);
+        }
+    }
 }

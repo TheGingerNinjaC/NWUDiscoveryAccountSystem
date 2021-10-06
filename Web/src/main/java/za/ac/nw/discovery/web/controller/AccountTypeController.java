@@ -1,17 +1,18 @@
 package za.ac.nw.discovery.web.controller;
 
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import za.ac.nw.discovery.domain.dto.AccountTypeDto;
 import za.ac.nw.discovery.domain.service.GeneralResponse;
-import za.ac.nw.discovery.logic.flow.FetchAccountTypeFlow;
+import za.ac.nw.discovery.logic.flow.ICreateAccountTypeFlow;
+import za.ac.nw.discovery.logic.flow.IFetchAccountTypeFlow;
 
 import java.util.List;
 
@@ -19,11 +20,14 @@ import java.util.List;
 @RequestMapping("account-Type")
 public class AccountTypeController {
 
-    private final FetchAccountTypeFlow fetchAccountTypeFlow;
+    private final IFetchAccountTypeFlow fetchAccountTypeFlow;
+    private final ICreateAccountTypeFlow createAccountTypeFlow;
 
     @Autowired
-    public AccountTypeController(FetchAccountTypeFlow fetchAccountTypeFlow) {
+    public AccountTypeController(IFetchAccountTypeFlow fetchAccountTypeFlow,
+                                 @Qualifier("createAccountTypeFlowName") ICreateAccountTypeFlow createAccountTypeFlow) {
         this.fetchAccountTypeFlow = fetchAccountTypeFlow;
+        this.createAccountTypeFlow = createAccountTypeFlow;
     }
 
     @GetMapping("/all")
@@ -37,5 +41,19 @@ public class AccountTypeController {
         List<AccountTypeDto> accountTypes = fetchAccountTypeFlow.getAllAccountTypes();
         GeneralResponse<List<AccountTypeDto>> response = new GeneralResponse<>(true, accountTypes);
         return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @PostMapping("/create")
+    @ApiOperation(value = "Creates a new AccountType", notes = "Creates a new AccountType in the DB")
+    @ApiResponses(value = {
+            @ApiResponse(code = 201, message = "The AccountType was created successfully", response = GeneralResponse.class),
+            @ApiResponse(code = 400, message = "Bad Request", response = GeneralResponse.class),
+            @ApiResponse(code = 500, message = "Internal server error", response = GeneralResponse.class)})
+    public ResponseEntity<GeneralResponse<AccountTypeDto>> create(
+            @ApiParam(value = "Request body to create a new AccountType", required = true)
+            @RequestBody AccountTypeDto accountType) {
+        AccountTypeDto accountTypeResponse = createAccountTypeFlow.create(accountType);
+        GeneralResponse<AccountTypeDto> response = new GeneralResponse<>(true, accountTypeResponse);
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 }
