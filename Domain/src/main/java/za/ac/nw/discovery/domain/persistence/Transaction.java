@@ -1,9 +1,6 @@
 package za.ac.nw.discovery.domain.persistence;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
@@ -27,8 +24,15 @@ public class Transaction implements Serializable {
         this.transactionDate = transactionDate;
     }
 
+    public Transaction(Long accountId, Double amount, LocalDate transactionDate) {
+        this.accountId = accountId;
+        this.amount = amount;
+        this.transactionDate = transactionDate;
+    }
+
     @Id
     @Column(name = "Transaction_Id")
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     public Long getTransactionId() {
         return transactionId;
     }

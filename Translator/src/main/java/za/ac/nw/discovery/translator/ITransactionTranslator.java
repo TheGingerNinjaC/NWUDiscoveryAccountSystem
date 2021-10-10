@@ -7,4 +7,5 @@ import java.util.List;
 public interface ITransactionTranslator {
 
     List<TransactionDto> getAllMilesTransactions();
+    TransactionDto createTransaction(TransactionDto transactionDto);
 }

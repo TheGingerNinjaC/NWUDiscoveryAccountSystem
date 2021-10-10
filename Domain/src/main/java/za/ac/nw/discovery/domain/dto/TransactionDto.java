@@ -1,5 +1,6 @@
 package za.ac.nw.discovery.domain.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModel;
 import za.ac.nw.discovery.domain.persistence.Transaction;
 
@@ -74,5 +75,10 @@ public class TransactionDto implements Serializable {
                 ", amount=" + amount +
                 ", transactionDate=" + transactionDate +
                 '}';
+    }
+
+    @JsonIgnore
+    public Transaction getTransaction() {
+        return new Transaction(getAccountId(), getAmount(), getTransactionDate());
     }
 }

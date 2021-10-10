@@ -24,4 +24,9 @@ public class FetchTransactionFlow implements IFetchTransactionFlow {
     public List<TransactionDto> getAllMilesTransactions() {
         return transactionTranslator.getAllMilesTransactions();
     }
+
+    @Override
+    public TransactionDto createTransaction(TransactionDto transaction) {
+        return transactionTranslator.createTransaction(transaction);
+    }
 }
