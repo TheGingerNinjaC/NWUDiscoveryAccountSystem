@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface IAccountTypeTranslator {
     List<AccountTypeDto> getAllAccountTypes();
-    public AccountTypeDto create(AccountTypeDto accountTypeDto);
+    AccountTypeDto create(AccountTypeDto accountTypeDto);
     AccountTypeDto getAccountTypeByMnemonicNativeQuery(String mnemonic);
 }
