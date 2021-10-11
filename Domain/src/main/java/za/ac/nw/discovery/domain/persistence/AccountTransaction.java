@@ -6,25 +6,25 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
-@Table(name="Transaction")
-public class Transaction implements Serializable {
+@Table(name="Account_Transaction")
+public class AccountTransaction implements Serializable {
 
     private Long transactionId;
     private Long accountId;
     private Double amount;
     private LocalDate transactionDate;
 
-    public Transaction() {
+    public AccountTransaction() {
     }
 
-    public Transaction(Long transactionId, Long accountId, Double amount, LocalDate transactionDate) {
+    public AccountTransaction(Long transactionId, Long accountId, Double amount, LocalDate transactionDate) {
         this.transactionId = transactionId;
         this.accountId = accountId;
         this.amount = amount;
         this.transactionDate = transactionDate;
     }
 
-    public Transaction(Long accountId, Double amount, LocalDate transactionDate) {
+    public AccountTransaction(Long accountId, Double amount, LocalDate transactionDate) {
         this.accountId = accountId;
         this.amount = amount;
         this.transactionDate = transactionDate;
@@ -72,7 +72,7 @@ public class Transaction implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Transaction that = (Transaction) o;
+        AccountTransaction that = (AccountTransaction) o;
         return Objects.equals(transactionId, that.transactionId) && Objects.equals(accountId, that.accountId) && Objects.equals(amount, that.amount) && Objects.equals(transactionDate, that.transactionDate);
     }
 
@@ -85,7 +85,7 @@ public class Transaction implements Serializable {
     public String toString() {
         return "Transaction{" +
                 "transactionId=" + transactionId +
-                ", accountTypeId=" + accountId +
+                ", accountId=" + accountId +
                 ", amount=" + amount +
                 ", transactionDate=" + transactionDate +
                 '}';

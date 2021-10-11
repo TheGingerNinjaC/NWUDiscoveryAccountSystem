@@ -58,4 +58,13 @@ public class AccountTranslator implements IAccountTranslator {
         }
     }
 
+    @Override
+    public void updateAccountBalance(Long accountId, Double balance) {
+        try {
+            accountRepository.updateAccountBalance(accountId, balance);
+        } catch (Exception e) {
+            throw new RuntimeException("Unable to update the DB", e);
+        }
+    }
+
 }

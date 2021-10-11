@@ -9,4 +9,5 @@ public interface IAccountTranslator {
     AccountDto getAccount(Long accountId);
 
     AccountDto createAccount(AccountDto account);
+    void updateAccountBalance(Long accountId, Double balance);
 }

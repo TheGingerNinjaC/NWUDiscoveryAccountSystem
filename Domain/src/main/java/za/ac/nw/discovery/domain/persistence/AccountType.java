@@ -15,7 +15,7 @@ public class AccountType implements Serializable {
     private String accountTypeName;
     private LocalDate creationDate;
 
-    private Set<Transaction> transactions;
+    private Set<AccountTransaction> transactions;
 
     public AccountType(Long accountTypeId, String mnemonic, String accountTypeName, LocalDate creationDate) {
         this.accountTypeId = accountTypeId;

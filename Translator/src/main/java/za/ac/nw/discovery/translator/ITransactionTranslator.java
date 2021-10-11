@@ -1,11 +1,13 @@
 package za.ac.nw.discovery.translator;
 
-import za.ac.nw.discovery.domain.dto.TransactionDto;
+import za.ac.nw.discovery.domain.dto.AccountTransactionDto;
 
 import java.util.List;
 
 public interface ITransactionTranslator {
 
-    List<TransactionDto> getAllMilesTransactions();
-    TransactionDto createTransaction(TransactionDto transactionDto);
+    List<AccountTransactionDto> getAllMilesTransactions();
+    AccountTransactionDto createTransaction(AccountTransactionDto transactionDto);
+
+    AccountTransactionDto addMiles(AccountTransactionDto accountTransactionDto);
 }
